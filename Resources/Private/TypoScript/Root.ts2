@@ -1,0 +1,86 @@
+prototype(DasPerfekteTeam.Podcaster:Podcast.Player) < prototype(TYPO3.Neos:Page) {
+    neosBackendHeader >
+    neosBackendEndpoints >
+    neosBackendDocumentNodeData >
+    neosBackendContainer >
+    lastVisitedNodeScript >
+    neosBackendFooter >
+    head {
+		stylesheets.site = TYPO3.TypoScript:Template {
+			templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Player.html'
+			sectionName = 'stylesheets'
+		}
+
+		javascripts.site = TYPO3.TypoScript:Template {
+			templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Player.html'
+			sectionName = 'headScripts'
+		}
+	}
+    bodyTag {
+        attributes.class = 'podcast-embed'
+    }
+    body {
+        templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Player.html'
+        sectionName = 'body'
+        documentNode = ${q(documentNode).context({workspaceName: 'live'}).get(0)}
+
+        metadata = TYPO3.TypoScript:RawArray {
+            title = ${documentNode.label}
+            subtitle = ''
+            publicationDate = ${Date.format(documentNode.lastPublicationDateTime, 'Y-m-d\TH:i:sP')}
+            poster = TYPO3.Neos:ImageUri {
+                asset = ${q(documentNode).property('poster')}
+                @if.hasImage = ${q(documentNode).property('poster') != null}
+            }
+
+            permalink = TYPO3.Neos:NodeUri {
+                node = ${q(documentNode).context({workspaceName: 'live'}).get(0)}
+                absolute = true
+            }
+
+            show = TYPO3.TypoScript:RawArray {
+                title = 'Das Perfekte Team'
+                subtitle = 'Agile Teams und co.'
+                summary = 'Thomas und Christian unterhalten sich mit Leuten über Teams.'
+                url = TYPO3.Neos:NodeUri {
+                    node = ${q(site).context({workspaceName: 'live'}).get(0)}
+                    absolute = true
+                }
+            }
+
+            activeTab = 'info'
+        }
+    }
+}
+
+root {
+    podcastEmbed {
+        condition = ${q(documentNode).is('[instanceof DasPerfekteTeam.Podcaster:Podcast]') && (request.httpRequest.arguments.embed == '1')}
+        renderer = DasPerfekteTeam.Podcaster:Podcast.Player
+    }
+}
+
+prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
+    documentNode = ${documentNode}
+}
+
+prototype(TYPO3.TypoScript:GlobalCacheIdentifiers) {
+	embedArgument = ${request.httpRequest.arguments.embed}
+}
+
+prototype(TYPO3.Neos:PrimaryContent) {
+    podcastBackend {
+        condition = ${q(node).is('[instanceof DasPerfekteTeam.Podcaster:Podcast]') && node.context.inBackend}
+        renderer = TYPO3.TypoScript:Array {
+            main = TYPO3.Neos:ContentCollection {
+                nodePath = ${nodePath}
+            }
+
+            chapters = TYPO3.Neos:ContentCollection {
+                nodePath = 'chapters'
+            }
+        }
+    }
+
+
+}

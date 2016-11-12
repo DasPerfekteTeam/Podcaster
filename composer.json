@@ -1,0 +1,19 @@
+{
+    "description": "Neos Podcasts",
+    "type": "neos-plugin",
+    "name": "dasperfekteteam/podcaster",
+    "require": {
+        "typo3/flow": "*",
+        "typo3/neos": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DasPerfekteTeam\\Podcaster\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "DasPerfekteTeam.Podcaster"
+        }
+    }
+}

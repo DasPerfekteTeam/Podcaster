@@ -1,0 +1,9 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<div class="podcaster-podcast podlove-player-wrapper">
+    <audio id="podcast-{documentNode.identifier}" data-podlove-web-player-height="480" data-podlove-web-player-source="{neos:uri.node(node: documentNode, absolute: true, arguments: {embed: 1})}">
+        <f:for each="{documentNode.properties.audio}" as="file">
+            <source src="{f:uri.resource(resource: file.resource)}"
+                    type="{f:if(condition: '{file.resource.fileExtension} == \'m4a\'', then: 'audio/mp4', else: file.resource.mediaType)}">
+        </f:for>
+    </audio>
+</div>
