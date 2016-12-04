@@ -3,3 +3,7 @@ TYPO3:
     typoScript:
       autoInclude:
         'DasPerfekteTeam.Podcaster': TRUE
+  Flow:
+    mvc:
+      routes:
+        'DasPerfekteTeam.Podcaster': true

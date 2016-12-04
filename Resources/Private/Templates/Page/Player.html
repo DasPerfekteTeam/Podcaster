@@ -14,7 +14,7 @@
 <body>
 <f:section name="body">
 	<div>
-		<audio class="podcast" id="podcast-{documentNode.identifier}" data-identifier="{documentNode.identifier}">
+		<audio class="podcast" id="podcast-{documentNode.identifier}">
 			<f:for each="{documentNode.properties.audio}" as="file">
 				<source src="{f:uri.resource(resource: file.resource)}" type="{f:if(condition: '{file.resource.fileExtension} == \'m4a\'', then: 'audio/mp4', else: file.resource.mediaType)}">
 			</f:for>

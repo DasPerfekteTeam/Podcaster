@@ -4,15 +4,54 @@
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: Podcast
+    inspector:
+      groups:
+        podcast:
+          label: Podcast
+  properties:
+    image:
+      type: TYPO3\Media\Domain\Model\ImageInterface
+      ui:
+        label: i18n
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'document'
+          position: 50
+    author:
+      type: string
+      ui:
+        label: Author
+        inspector:
+          group: podcast
+    summary:
+      type: string
+      ui:
+        label: Summary
+        inspector:
+          group: podcast
+    explicit:
+      type: boolean
+      ui:
+        label: Explicit
+        inspector:
+          group: podcast
+
+'DasPerfekteTeam.Podcaster:Episode':
+  superTypes:
+    'TYPO3.Neos:Document': true
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
     chapters:
       type: 'TYPO3.Neos:ContentCollection'
       constraints:
         nodeTypes:
           '*': false
           'DasPerfekteTeam.Podcaster:Chapter': true
-
   ui:
-    label: Podcast
+    label: Episode
   properties:
     audio:
       type: array<TYPO3\Media\Domain\Model\Asset>
@@ -23,6 +62,14 @@
         reloadIfChanged: TRUE
     poster:
       type: TYPO3\Media\Domain\Model\ImageInterface
+      ui:
+        label: i18n
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'document'
+          position: 50
+    publicationDate:
+      type: DateTime
       ui:
         label: i18n
         reloadIfChanged: TRUE
@@ -97,3 +144,9 @@
           'link':
             'a': false
 
+
+'DasPerfekteTeam.Podcaster:EpisodeList':
+  superTypes:
+    'TYPO3.Neos:Content': true
+  ui:
+    label: Episode List

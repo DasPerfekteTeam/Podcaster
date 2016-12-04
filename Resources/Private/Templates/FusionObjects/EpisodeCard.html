@@ -1,0 +1,15 @@
+{namespace n=TYPO3\Neos\ViewHelpers}
+<div class="col s12 m12 l6">
+    <div class="card small">
+        <div class="card-image">
+            {player -> f:format.raw()}
+        </div>
+        <div class="card-content">
+            <span class="card-title">{title}</span>
+        </div>
+        <div class="card-action">
+            <n:link.node node="{node}">zur Episode</n:link.node>
+        </div>
+    </div>
+</div>
+

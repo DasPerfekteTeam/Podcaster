@@ -1,0 +1,24 @@
+{namespace atom}
+{namespace itunes}
+<f:if condition="{audio}">
+    <item>
+        <title>{title}</title>
+        <link>{url}</link>
+        <pubDate>{publicationDate}</pubDate>
+        <guid isPermaLink="false">{guid}</guid>
+        <description><![CDATA[
+
+    ]]></description>
+        <atom:link rel="http://podlove.org/deep-link"
+                   href="{url}"/>
+        <enclosure url="{f:uri.resource(resource: audio.resource)}" length="{audioLength}"
+                   type="{audioType}" bitlove:guid="audio-{audio -> f:format.identifier()}"/>
+        <itunes:duration>{duration}</itunes:duration>
+        <itunes:subtitle>
+        </itunes:subtitle>
+        <itunes:summary>
+        </itunes:summary>
+        <itunes:image href="{image}"/>
+    </item>
+
+</f:if>

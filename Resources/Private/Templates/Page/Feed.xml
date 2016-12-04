@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        {namespace itunes}
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:bitlove="http://bitlove.org" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:psc="http://podlove.org/simple-chapters" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:fh="http://purl.org/syndication/history/1.0"
+     xmlns:ts="http://typo3.org/ns/TYPO3/TypoScript/ViewHelpers">
+
+    <channel>
+        <title>{title}</title>
+        <link>{url}</link>
+        <description>{description}</description>
+        <lastBuildDate>{date}</lastBuildDate>
+        <language>{locale}</language>
+        <generator>Das Perfekte Team Neos Podcaster Plugin</generator>
+        <image>
+            <url>{image}</url>
+            <title>{title}</title>
+            <link>{url}</link>
+        </image>
+
+        <itunes:author>{author}</itunes:author>
+        <itunes:summary>{summary}</itunes:summary>
+        <itunes:image href="{image}"/>
+        <itunes:subtitle></itunes:subtitle>
+        <itunes:keywords>{keywords}</itunes:keywords>
+        <itunes:explicit>{explicit}</itunes:explicit>
+
+        <f:for each="{episodes}" as="episode">
+            <ts:render path="episodeRenderer" context="{episode: episode}" />
+        </f:for>
+    </channel>
+</rss>
