@@ -5,6 +5,6 @@ Neos:
       routes:
         DasPerfekteTeam.Podcaster: true
   Neos:
-    typoScript:
+    fusion:
       autoInclude:
         DasPerfekteTeam.Podcaster: true
