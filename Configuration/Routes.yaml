@@ -2,11 +2,11 @@
   name: 'Neos :: Frontend :: Podcast episdoe with feed.xml'
   uriPattern: '{node}.{audiotype}.podcast.xml'
   defaults:
-    '@package': TYPO3.Neos
+    '@package': Neos.Neos
     '@controller': Frontend\Node
     '@action': show
     '@format': podcast.xml
   routeParts:
     node:
-      handler: TYPO3\Neos\Routing\FrontendNodeRoutePartHandlerInterface
+      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandlerInterface
   appendExceedingArguments: true

@@ -1,4 +1,4 @@
-{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace neos=Neos\Neos\ViewHelpers}
 <div class="">
     <audio id="podcast-{documentNode.identifier}" class="podcaster-podlove-web-player" data-podlove-web-player='{metadata -> f:format.json() -> f:format.raw()}'>
         <f:for each="{documentNode.properties.audio}" as="file">
