@@ -4,36 +4,6 @@ prototype(DasPerfekteTeam.Podcaster:RawCollection) {
     itemName = 'item'
 }
 
-prototype(DasPerfekteTeam.Podcaster:Podcast.Player) < prototype(TYPO3.Neos:Page) {
-    neosBackendHeader >
-    neosBackendEndpoints >
-    neosBackendDocumentNodeData >
-    neosBackendContainer >
-    lastVisitedNodeScript >
-    neosBackendFooter >
-    head {
-		stylesheets.site = TYPO3.TypoScript:Template {
-			templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Player.html'
-			sectionName = 'stylesheets'
-		}
-
-		javascripts.site = TYPO3.TypoScript:Template {
-			templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Player.html'
-			sectionName = 'headScripts'
-		}
-	}
-    bodyTag {
-        attributes.class = 'podcast-embed'
-    }
-    body {
-        templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Player.html'
-        sectionName = 'body'
-        documentNode = ${q(documentNode).context({workspaceName: 'live'}).get(0)}
-    }
-}
-
-
-
 prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(TYPO3.TypoScript:Template) {
     templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Partials/Episode.xml'
 
@@ -81,10 +51,6 @@ prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(TYPO3.TypoScript:Template)
 }
 
 root {
-    podcastEmbed {
-        condition = ${q(documentNode).is('[instanceof DasPerfekteTeam.Podcaster:Episode]') && (request.httpRequest.arguments.embed == '1')}
-        renderer = DasPerfekteTeam.Podcaster:Podcast.Player
-    }
     podcastFeed {
         condition = ${request.format == 'podcast.xml'}
         renderer = DasPerfekteTeam.Podcaster:Feed

@@ -1,5 +1,5 @@
 -
-  name: 'Neos :: Frontend :: Document node with feed.xml'
+  name: 'Neos :: Frontend :: Podcast episdoe with feed.xml'
   uriPattern: '{node}.{audiotype}.podcast.xml'
   defaults:
     '@package': TYPO3.Neos
