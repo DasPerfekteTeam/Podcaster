@@ -1,9 +1,11 @@
+
 TYPO3:
   Neos:
     typoScript:
       autoInclude:
-        'DasPerfekteTeam.Podcaster': TRUE
+        DasPerfekteTeam.Podcaster: true
+Neos:
   Flow:
     mvc:
       routes:
-        'DasPerfekteTeam.Podcaster': true
+        DasPerfekteTeam.Podcaster: true
