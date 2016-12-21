@@ -9,14 +9,14 @@ prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(Neos.Fusion:Templa
 
     episode = ${episode}
     title = ${q(episode).property('title')}
-    url = TYPO3.Neos:NodeUri {
+    url = Neos.Neos:NodeUri {
         node = ${episode}
         format = 'html'
         absolute = true
     }
     description = ${q(episode).property('metaDescription')}
     date = ${Date.format(q(episode).property('publicationDate'), 'D, d M Y H:i:s O')}
-    image = TYPO3.Neos:ImageUri {
+    image = Neos.Neos:ImageUri {
         asset = ${q(episode).property('poster')}
         @if.hasImage = ${q(documentNode).property('poster') != null}
     }
@@ -30,14 +30,14 @@ prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
 
     podcast = ${podcast}
     title = ${q(podcast).property('title')}
-    url = TYPO3.Neos:NodeUri {
+    url = Neos.Neos:NodeUri {
         node = ${podcast}
         format = 'html'
         absolute = true
     }
     description = ${q(podcast).property('metaDescription')}
     date = ${Date.format('now', 'D, d M Y H:i:s O')}
-    image = TYPO3.Neos:ImageUri {
+    image = Neos.Neos:ImageUri {
         asset = ${q(podcast).property('image')}
     }
     author = ${q(podcast).property('author')}
@@ -65,12 +65,12 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
         title = ${episodeNode.label}
         subtitle = ''
         publicationDate = ${Date.format(episodeNode.lastPublicationDateTime, 'Y-m-d\TH:i:sP')}
-        poster = TYPO3.Neos:ImageUri {
+        poster = Neos.Neos:ImageUri {
             asset = ${q(episodeNode).property('poster')}
             @if.hasImage = ${q(episodeNode).property('poster') != null}
         }
 
-        permalink = TYPO3.Neos:NodeUri {
+        permalink = Neos.Neos:NodeUri {
             node = ${q(episodeNode).context({workspaceName: 'live'}).get(0)}
             absolute = true
         }
@@ -94,7 +94,7 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
             title = 'Das Perfekte Team'
             subtitle = 'Agile Teams und co.'
             summary = 'Thomas und Christian unterhalten sich mit Leuten über Teams.'
-            url = TYPO3.Neos:NodeUri {
+            url = Neos.Neos:NodeUri {
                 node = ${q(site).context({workspaceName: 'live'}).get(0)}
                 absolute = true
             }
@@ -108,15 +108,15 @@ prototype(Neos.Fusion:GlobalCacheIdentifiers) {
 	embedArgument = ${request.httpRequest.arguments.embed}
 }
 
-prototype(TYPO3.Neos:PrimaryContent) {
+prototype(Neos.Neos:PrimaryContent) {
     podcastBackend {
         condition = ${q(node).is('[instanceof DasPerfekteTeam.Podcaster:Episode]') && node.context.inBackend}
         renderer = Neos.Fusion:Array {
-            main = TYPO3.Neos:ContentCollection {
+            main = Neos.Neos:ContentCollection {
                 nodePath = ${nodePath}
             }
 
-            chapters = TYPO3.Neos:ContentCollection {
+            chapters = Neos.Neos:ContentCollection {
                 attributes.class = 'collection'
                 nodePath = 'chapters'
             }
@@ -152,7 +152,7 @@ prototype(DasPerfekteTeam.Podcaster:EpisodeList) < prototype(Neos.Fusion:Tag) {
 
 	# The following line must not be removed as it adds required meta data to all content elements in backend
 	@process.contentElementWrapping {
-		expression = TYPO3.Neos:ContentElementWrapping
+		expression = Neos.Neos:ContentElementWrapping
 		@position = 'end 999999999'
 	}
 }
