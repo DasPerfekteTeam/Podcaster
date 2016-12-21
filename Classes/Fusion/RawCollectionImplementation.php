@@ -1,7 +1,7 @@
 <?php
 namespace DasPerfekteTeam\Podcaster\Fusion;
 
-use TYPO3\TypoScript\TypoScriptObjects\AbstractTypoScriptObject;
+use Neos\Fusion\TypoScriptObjects\AbstractTypoScriptObject;
 
 /**
  *
