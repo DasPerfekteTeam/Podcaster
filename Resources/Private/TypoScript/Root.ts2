@@ -4,7 +4,7 @@ prototype(DasPerfekteTeam.Podcaster:RawCollection) {
     itemName = 'item'
 }
 
-prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(TYPO3.TypoScript:Template) {
+prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(Neos.Fusion:Template) {
     templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Partials/Episode.xml'
 
     episode = ${episode}
@@ -24,7 +24,7 @@ prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(TYPO3.TypoScript:T
     audio = ${q(q(episode).property('audio')).get(0)}
 }
 
-prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(TYPO3.TypoScript:Template) {
+prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
     @context.podcast = ${q(node).closest('[instanceof DasPerfekteTeam.Podcaster:Podcast]').get(0)}
     templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Page/Feed.xml'
 
@@ -61,7 +61,7 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
     @context.episodeNode = ${documentNode}
     documentNode = ${episodeNode}
 
-    metadata = TYPO3.TypoScript:RawArray {
+    metadata = Neos.Fusion:RawArray {
         title = ${episodeNode.label}
         subtitle = ''
         publicationDate = ${Date.format(episodeNode.lastPublicationDateTime, 'Y-m-d\TH:i:sP')}
@@ -84,13 +84,13 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
 
         chapters = DasPerfekteTeam.Podcaster:RawCollection {
             collection = ${q(episodeNode).children('chapters').children().get()}
-            itemRenderer = TYPO3.TypoScript:RawArray {
+            itemRenderer = Neos.Fusion:RawArray {
                 start = ${q(item).property('start')}
                 title = ${q(item).property('title')}
             }
         }
 
-        show = TYPO3.TypoScript:RawArray {
+        show = Neos.Fusion:RawArray {
             title = 'Das Perfekte Team'
             subtitle = 'Agile Teams und co.'
             summary = 'Thomas und Christian unterhalten sich mit Leuten über Teams.'
@@ -104,14 +104,14 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
     }
 }
 
-prototype(TYPO3.TypoScript:GlobalCacheIdentifiers) {
+prototype(Neos.Fusion:GlobalCacheIdentifiers) {
 	embedArgument = ${request.httpRequest.arguments.embed}
 }
 
 prototype(TYPO3.Neos:PrimaryContent) {
     podcastBackend {
         condition = ${q(node).is('[instanceof DasPerfekteTeam.Podcaster:Episode]') && node.context.inBackend}
-        renderer = TYPO3.TypoScript:Array {
+        renderer = Neos.Fusion:Array {
             main = TYPO3.Neos:ContentCollection {
                 nodePath = ${nodePath}
             }
@@ -127,12 +127,12 @@ prototype(TYPO3.Neos:PrimaryContent) {
 }
 
 prototype(DasPerfekteTeam.Podcaster:EpisodeList) >
-prototype(DasPerfekteTeam.Podcaster:EpisodeList) < prototype(TYPO3.TypoScript:Tag) {
+prototype(DasPerfekteTeam.Podcaster:EpisodeList) < prototype(Neos.Fusion:Tag) {
     tagName = 'div'
     attributes.class = 'row'
-    content = TYPO3.TypoScript:Collection {
+    content = Neos.Fusion:Collection {
         collection = ${q(site).find('[instanceof DasPerfekteTeam.Podcaster:Episode]')}
-        itemRenderer = TYPO3.TypoScript:Template {
+        itemRenderer = Neos.Fusion:Template {
             templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/FusionObjects/EpisodeCard.html'
             node = ${item}
             title = ${item.label}
