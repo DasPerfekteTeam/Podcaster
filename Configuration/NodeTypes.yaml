@@ -1,7 +1,7 @@
 
 'DasPerfekteTeam.Podcaster:Podcast':
   superTypes:
-    'TYPO3.Neos:Document': '1'
+    'TYPO3.Neos:Document': true
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
@@ -40,7 +40,7 @@
           group: podcast
 'DasPerfekteTeam.Podcaster:Episode':
   superTypes:
-    'TYPO3.Neos:Document': '1'
+    'TYPO3.Neos:Document': true
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
@@ -78,12 +78,12 @@
           position: 50
 'DasPerfekteTeam.Podcaster:PlayerEmbed':
   superTypes:
-    'TYPO3.Neos:Content': '1'
+    'TYPO3.Neos:Content': true
   ui:
     label: Player
 'DasPerfekteTeam.Podcaster:Chapter':
   superTypes:
-    'TYPO3.Neos:Content': '1'
+    'TYPO3.Neos:Content': true
   ui:
     label: Chapter
   properties:
@@ -143,6 +143,6 @@
             a: false
 'DasPerfekteTeam.Podcaster:EpisodeList':
   superTypes:
-    'TYPO3.Neos:Content': '1'
+    'TYPO3.Neos:Content': true
   ui:
     label: 'Episode List'
