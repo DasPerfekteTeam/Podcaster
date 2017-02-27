@@ -1,4 +1,3 @@
-
 'DasPerfekteTeam.Podcaster:Podcast':
   superTypes:
     'Neos.Neos:Document': true
@@ -38,6 +37,7 @@
         label: Explicit
         inspector:
           group: podcast
+
 'DasPerfekteTeam.Podcaster:Episode':
   superTypes:
     'Neos.Neos:Document': true
@@ -76,6 +76,7 @@
         inspector:
           group: document
           position: 50
+
 'DasPerfekteTeam.Podcaster:PlayerEmbed':
   superTypes:
     'Neos.Neos:Content': true
@@ -141,6 +142,7 @@
             ul: false
           link:
             a: false
+
 'DasPerfekteTeam.Podcaster:EpisodeList':
   superTypes:
     'Neos.Neos:Content': true

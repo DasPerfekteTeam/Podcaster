@@ -5,7 +5,7 @@
      xmlns:bitlove="http://bitlove.org" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
      xmlns:psc="http://podlove.org/simple-chapters" xmlns:content="http://purl.org/rss/1.0/modules/content/"
      xmlns:fh="http://purl.org/syndication/history/1.0"
-     xmlns:ts="http://typo3.org/ns/TYPO3/TypoScript/ViewHelpers">
+     xmlns:fs="http://typo3.org/ns/Neos/Fusion/ViewHelpers">
 
     <channel>
         <title>{title}</title>
@@ -28,7 +28,7 @@
         <itunes:explicit>{explicit}</itunes:explicit>
 
         <f:for each="{episodes}" as="episode">
-            <ts:render path="episodeRenderer" context="{episode: episode}" />
+            <fs:render path="episodeRenderer" context="{episode: episode}"/>
         </f:for>
     </channel>
 </rss>

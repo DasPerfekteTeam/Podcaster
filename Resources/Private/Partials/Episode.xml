@@ -20,5 +20,4 @@
         </itunes:summary>
         <itunes:image href="{image}"/>
     </item>
-
 </f:if>

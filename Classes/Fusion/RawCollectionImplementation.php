@@ -1,12 +1,12 @@
 <?php
 namespace DasPerfekteTeam\Podcaster\Fusion;
 
-use Neos\Fusion\FusionObjects\AbstractTypoScriptObject;
+use Neos\Fusion\FusionObjects\AbstractFusionObject;
 
 /**
  *
  */
-class RawCollectionImplementation extends AbstractTypoScriptObject
+class RawCollectionImplementation extends AbstractFusionObject
 {
     /**
      * The number of rendered nodes, filled only after evaluate() was called.
@@ -22,7 +22,7 @@ class RawCollectionImplementation extends AbstractTypoScriptObject
      */
     public function getCollection()
     {
-        return $this->tsValue('collection');
+        return $this->fusionValue('collection');
     }
 
     /**
@@ -30,7 +30,7 @@ class RawCollectionImplementation extends AbstractTypoScriptObject
      */
     public function getItemName()
     {
-        return $this->tsValue('itemName');
+        return $this->fusionValue('itemName');
     }
 
     /**
@@ -38,7 +38,7 @@ class RawCollectionImplementation extends AbstractTypoScriptObject
      */
     public function getItemKey()
     {
-        return $this->tsValue('itemKey');
+        return $this->fusionValue('itemKey');
     }
 
     /**
@@ -48,7 +48,7 @@ class RawCollectionImplementation extends AbstractTypoScriptObject
      */
     public function getIterationName()
     {
-        return $this->tsValue('iterationName');
+        return $this->fusionValue('iterationName');
     }
 
     /**
@@ -85,7 +85,7 @@ class RawCollectionImplementation extends AbstractTypoScriptObject
         $iterationName = $this->getIterationName();
         $collectionTotalCount = count($collection);
         foreach ($collection as $collectionKey => $collectionElement) {
-            $context = $this->tsRuntime->getCurrentContext();
+            $context = $this->runtime->getCurrentContext();
             $context[$itemName] = $collectionElement;
             if ($itemKey !== null) {
                 $context[$itemKey] = $collectionKey;
@@ -94,9 +94,9 @@ class RawCollectionImplementation extends AbstractTypoScriptObject
                 $context[$iterationName] = $this->prepareIterationInformation($collectionTotalCount);
             }
 
-            $this->tsRuntime->pushContextArray($context);
-            $result[] = $this->tsRuntime->render($this->path . '/itemRenderer');
-            $this->tsRuntime->popContext();
+            $this->runtime->pushContextArray($context);
+            $result[] = $this->runtime->render($this->path . '/itemRenderer');
+            $this->runtime->popContext();
             $this->numberOfRenderedNodes++;
         }
 
