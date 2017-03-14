@@ -1,6 +1,21 @@
 -
   name: 'Neos :: Frontend :: Podcast episdoe with feed.xml'
-  uriPattern: '{node}.{audiotype}.podcast.xml'
+  uriPattern: '{node}podcast.{audiotype}.xml'
+  defaults:
+    '@package': Neos.Neos
+    '@controller': Frontend\Node
+    '@action': show
+    '@format': podcast.xml
+  routeParts:
+    node:
+      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandlerInterface
+      options:
+        onlyMatchSiteNodes: true
+  appendExceedingArguments: true
+
+-
+  name: 'Neos :: Frontend :: Podcast episdoe with feed.xml'
+  uriPattern: '{node}.podcast.{audiotype}.xml'
   defaults:
     '@package': Neos.Neos
     '@controller': Frontend\Node

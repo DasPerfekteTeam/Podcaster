@@ -92,8 +92,8 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
 
         show = Neos.Fusion:RawArray {
             title = 'Das Perfekte Team'
-            subtitle = 'Agile Teams und co.'
-            summary = 'Thomas und Christian unterhalten sich mit Leuten über Teams.'
+            subtitle = 'Agile Teams'
+            summary = 'Thomas und Christian unterhalten sich mit Gästen über (agile) Teams und die Umgebung für diese.'
             url = Neos.Neos:NodeUri {
                 node = ${q(site).context({workspaceName: 'live'}).get(0)}
                 absolute = true

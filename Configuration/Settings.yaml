@@ -3,7 +3,8 @@ Neos:
   Flow:
     mvc:
       routes:
-        DasPerfekteTeam.Podcaster: true
+        DasPerfekteTeam.Podcaster:
+          position: 'start'
   Neos:
     fusion:
       autoInclude:

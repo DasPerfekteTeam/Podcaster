@@ -82,6 +82,7 @@
     'Neos.Neos:Content': true
   ui:
     label: Player
+
 'DasPerfekteTeam.Podcaster:Chapter':
   superTypes:
     'Neos.Neos:Content': true
