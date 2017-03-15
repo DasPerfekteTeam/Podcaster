@@ -9,6 +9,7 @@ prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(Neos.Fusion:Templa
 
     episode = ${episode}
     title = ${q(episode).property('title')}
+    subtitle = ${q(episode).property('titleOverride')}
     url = Neos.Neos:NodeUri {
         node = ${episode}
         format = 'html'
@@ -18,10 +19,14 @@ prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(Neos.Fusion:Templa
     date = ${Date.format(q(episode).property('publicationDate'), 'D, d M Y H:i:s O')}
     image = Neos.Neos:ImageUri {
         asset = ${q(episode).property('poster')}
+        absolute = true
         @if.hasImage = ${q(documentNode).property('poster') != null}
     }
 
-    audio = ${q(q(episode).property('audio')).get(0)}
+    audio = ${Array.first(Podcaster.filterByProperty(q(episode).property('audio'), 'resource.fileExtension', request.arguments.audiotype))}
+    audioLength = ${q(episode).property('audioLength')}
+
+    @if.hasAudio = ${this.audio ? true : false}
 }
 
 prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
@@ -35,13 +40,20 @@ prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
         format = 'html'
         absolute = true
     }
+
+    selfLink = ${request.httpRequest.uri}
+
     description = ${q(podcast).property('metaDescription')}
     date = ${Date.format('now', 'D, d M Y H:i:s O')}
     image = Neos.Neos:ImageUri {
         asset = ${q(podcast).property('image')}
+        absolute = true
     }
     author = ${q(podcast).property('author')}
     explicit = ${q(podcast).property('explicit') ? 'yes' : 'no'}
+    category = ''
+    email = ''
+
     keywords = ${q(podcast).property('metaKeywords')}
     summary = ${q(podcast).property('summary') ? q(podcast).property('summary') : q(podcast).property('metaDescription')}
     locale = 'de-DE'
@@ -50,10 +62,15 @@ prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
     episodeRenderer = DasPerfekteTeam.Podcaster:Feed.Episode
 }
 
+prototype(DasPerfekteTeam.Podcaster:Feed.Http) < prototype(Neos.Fusion:Http.Message) {
+    httpResponseHead.headers.Content-Type = 'application/xml'
+    content = DasPerfekteTeam.Podcaster:Feed
+}
+
 root {
     podcastFeed {
         condition = ${request.format == 'podcast.xml'}
-        renderer = DasPerfekteTeam.Podcaster:Feed
+        renderer = DasPerfekteTeam.Podcaster:Feed.Http
     }
 }
 
@@ -102,10 +119,6 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
 
         activeTab = 'info'
     }
-}
-
-prototype(Neos.Fusion:GlobalCacheIdentifiers) {
-	embedArgument = ${request.httpRequest.arguments.embed}
 }
 
 prototype(Neos.Neos:PrimaryContent) {

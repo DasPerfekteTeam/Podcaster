@@ -9,3 +9,6 @@ Neos:
     fusion:
       autoInclude:
         DasPerfekteTeam.Podcaster: true
+  Fusion:
+    defaultContext:
+      Podcaster: DasPerfekteTeam\Podcaster\Fusion\Helpers\FeedHelper

@@ -1,23 +1,17 @@
-{namespace atom}
-{namespace itunes}
-<f:if condition="{audio}">
-    <item>
-        <title>{title}</title>
-        <link>{url}</link>
-        <pubDate>{publicationDate}</pubDate>
-        <guid isPermaLink="false">{guid}</guid>
-        <description><![CDATA[
-
-    ]]></description>
-        <atom:link rel="http://podlove.org/deep-link"
-                   href="{url}"/>
-        <enclosure url="{f:uri.resource(resource: audio.resource)}" length="{audioLength}"
-                   type="{audioType}" bitlove:guid="audio-{audio -> f:format.identifier()}"/>
-        <itunes:duration>{duration}</itunes:duration>
-        <itunes:subtitle>
-        </itunes:subtitle>
-        <itunes:summary>
-        </itunes:summary>
-        <itunes:image href="{image}"/>
-    </item>
-</f:if>
+{namespace atom} {namespace itunes} {namespace bitlove}
+        <item>
+            <title>{title}</title>
+            <link>{url}</link>
+            <pubDate>{publicationDate}</pubDate>
+            <guid isPermaLink="false">{audio -> f:format.identifier()}</guid>
+            <description><f:format.cdata>
+                {description}
+            </f:format.cdata></description>
+            <enclosure url="{f:uri.resource(resource: audio.resource)}" length="{audioLength}" type="{audio.mediaType}" />
+            <itunes:duration>{audioLength}</itunes:duration>
+            <itunes:subtitle>{subtitle}</itunes:subtitle>
+            <itunes:summary><f:format.cdata>
+                    {description}
+            </f:format.cdata></itunes:summary>
+            <itunes:image href="{image}"/>
+        </item>

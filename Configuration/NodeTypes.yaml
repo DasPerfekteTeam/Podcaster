@@ -60,6 +60,12 @@
           group: document
         label: i18n
         reloadIfChanged: true
+    audioLength:
+      type: string
+      ui:
+        inspector:
+          group: document
+        label: i18n
     poster:
       type: Neos\Media\Domain\Model\ImageInterface
       ui:
