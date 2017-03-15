@@ -82,6 +82,10 @@
         inspector:
           group: document
           position: 50
+    metaDescription:
+      validation:
+        'Neos.Neos/Validation/StringLengthValidator':
+          maximum: 350
 
 'DasPerfekteTeam.Podcaster:PlayerEmbed':
   superTypes:

@@ -2,16 +2,16 @@
         <item>
             <title>{title}</title>
             <link>{url}</link>
-            <pubDate>{publicationDate}</pubDate>
+            <pubDate>{date}</pubDate>
             <guid isPermaLink="false">{audio -> f:format.identifier()}</guid>
             <description><f:format.cdata>
-                {description}
+            {description}
             </f:format.cdata></description>
             <enclosure url="{f:uri.resource(resource: audio.resource)}" length="{audioLength}" type="{audio.mediaType}" />
             <itunes:duration>{audioLength}</itunes:duration>
             <itunes:subtitle>{subtitle}</itunes:subtitle>
             <itunes:summary><f:format.cdata>
-                    {description}
+            {description}
             </f:format.cdata></itunes:summary>
             <itunes:image href="{image}"/>
         </item>

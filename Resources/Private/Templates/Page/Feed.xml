@@ -13,7 +13,7 @@
         <description>{description}</description>
         <lastBuildDate>{date}</lastBuildDate>
         <language>{locale}</language>
-        <generator>Das Perfekte Team Neos Podcaster Plugin</generator>
+        <generator>"Das Perfekte Team" Neos Podcaster Plugin</generator>
         <image>
             <url>{image}</url>
             <title>{title}</title>
@@ -23,18 +23,17 @@
         <itunes:author>{author}</itunes:author>
         <itunes:summary>{summary}</itunes:summary>
         <itunes:image href="{image}"/>
-        <itunes:subtitle></itunes:subtitle>
+        <itunes:subtitle>{summary}</itunes:subtitle>
         <itunes:keywords>{keywords}</itunes:keywords>
         <itunes:explicit>{explicit}</itunes:explicit>
         <f:if condition="{category}">
-            <itunes:category>{category}</itunes:category>
+        <itunes:category>{category}</itunes:category>
         </f:if>
         <f:if condition="{email}">
-            <itunes:email>{email}</itunes:email>
+        <itunes:email>{email}</itunes:email>
         </f:if>
 
         <atom:link href="{selfLink}" rel="self" type="application/rss+xml"/>
-
         <f:for each="{episodes}" as="episode">
 <fs:render path="episodeRenderer" context="{episode: episode}"/>
         </f:for>
