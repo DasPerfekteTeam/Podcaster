@@ -10,7 +10,7 @@
     <channel>
         <title>{title}</title>
         <link>{url}</link>
-        <description>{description}</description>
+        <description>{summary}</description>
         <lastBuildDate>{date}</lastBuildDate>
         <language>{locale}</language>
         <generator>"Das Perfekte Team" Neos Podcaster Plugin</generator>
