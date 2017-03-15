@@ -73,8 +73,6 @@ prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
         entryTags {
             # Whenever the node changes the matched condition could change
             1 = ${'Node_' + documentNode.identifier}
-            # Whenever one of the parent nodes changes the layout could change
-            2 = ${Neos.Caching.nodeTag(q(documentNode).parents())}
             # Whenever an episode changes
             3 = 'NodeType_DasPerfekteTeam.Podcaster:Episode'
         }
@@ -90,6 +88,10 @@ root {
     podcastFeed {
         condition = ${request.format == 'podcast.xml'}
         renderer = DasPerfekteTeam.Podcaster:Feed.Http
+    }
+
+    @cache.entryIdentifier {
+        audiotype = ${request.arguments.audiotype}
     }
 }
 
