@@ -27,7 +27,7 @@
         <itunes:keywords>{keywords}</itunes:keywords>
         <itunes:explicit>{explicit}</itunes:explicit>
         <f:if condition="{category}">
-        <itunes:category>{category}</itunes:category>
+        <itunes:category text="{category}" />
         </f:if>
         <f:if condition="{email}">
         <itunes:email>{email}</itunes:email>
