@@ -7,7 +7,7 @@
             <description><f:format.cdata>
             {description}
             </f:format.cdata></description>
-            <enclosure url="{f:uri.resource(resource: audio.resource)}" length="{audioLength}" type="{audio.mediaType}" />
+            <enclosure url="{f:uri.resource(resource: audio.resource)}" length="{audio.resource.fileSize}" type="{audio.mediaType}" />
             <itunes:duration>{audioLength}</itunes:duration>
             <itunes:subtitle>{subtitle}</itunes:subtitle>
             <itunes:summary><f:format.cdata>
