@@ -115,10 +115,10 @@ prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
         alwaysShowHours = true
         startVolume = 0.8
         width = 'auto'
-        summaryVisible = true
+        summaryVisible = false
         timecontrolsVisible = true
         sharebuttonsVisible = false
-        chaptersVisible = true
+        chaptersVisible = false
 
         chapters = DasPerfekteTeam.Podcaster:RawCollection {
             collection = ${q(episodeNode).children('chapters').children().get()}
