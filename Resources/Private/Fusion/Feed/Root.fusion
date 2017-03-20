@@ -1,0 +1,18 @@
+/**
+ * The HTTP message for the podcast XML feed
+ */
+prototype(DasPerfekteTeam.Podcaster:Feed.Http) < prototype(Neos.Fusion:Http.Message) {
+    httpResponseHead.headers.Content-Type = 'application/xml'
+    content = DasPerfekteTeam.Podcaster:Feed
+}
+
+root {
+    podcastFeed {
+        condition = ${request.format == 'podcast.xml'}
+        renderer = DasPerfekteTeam.Podcaster:Feed.Http
+    }
+
+    @cache.entryIdentifier {
+        audiotype = ${request.arguments.audiotype}
+    }
+}

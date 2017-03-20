@@ -1,0 +1,52 @@
+/**
+ * Rendering of the outer (channel) feed XML for the podcast
+ */
+prototype(DasPerfekteTeam.Podcaster:Feed) < prototype(Neos.Fusion:Template) {
+    @context.podcast = ${q(node).closest('[instanceof DasPerfekteTeam.Podcaster:Podcast]').get(0)}
+    templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Feed/Channel.xml'
+
+    podcast = ${podcast}
+    title = ${q(podcast).property('title')}
+    url = Neos.Neos:NodeUri {
+        node = ${podcast}
+        format = 'html'
+        absolute = true
+    }
+
+    selfLink = ${request.httpRequest.uri}
+
+    description = ${q(podcast).property('metaDescription')}
+    date = ${Date.format('now', 'D, d M Y H:i:s O')}
+    image = Neos.Neos:ImageUri {
+        asset = ${q(podcast).property('image')}
+        absolute = true
+    }
+    author = ${q(podcast).property('author')}
+    explicit = ${q(podcast).property('explicit') ? 'yes' : 'no'}
+    category = ''
+    email = ''
+
+    keywords = ${q(podcast).property('metaKeywords')}
+    summary = ${q(podcast).property('summary') ? q(podcast).property('summary') : q(podcast).property('metaDescription')}
+    locale = 'de-DE'
+
+    episodes = ${q(podcast).children('[instanceof DasPerfekteTeam.Podcaster:Episode]')}
+    episodeRenderer = DasPerfekteTeam.Podcaster:Feed.Episode
+
+
+    @cache {
+        mode = 'cached'
+
+        entryIdentifier {
+            node = ${node}
+            audiotype = ${request.arguments.audiotype}
+        }
+
+        entryTags {
+            # Whenever the node changes the matched condition could change
+            1 = ${'Node_' + documentNode.identifier}
+            # Whenever an episode changes
+            3 = 'NodeType_DasPerfekteTeam.Podcaster:Episode'
+        }
+    }
+}

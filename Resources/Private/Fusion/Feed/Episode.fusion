@@ -1,0 +1,27 @@
+/**
+ * Rendering definition for the XML snippet of a single episode in the Podcast feed
+ */
+prototype(DasPerfekteTeam.Podcaster:Feed.Episode) < prototype(Neos.Fusion:Template) {
+    templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/Feed/Episode.xml'
+
+    episode = ${episode}
+    title = ${q(episode).property('title')}
+    subtitle = ${q(episode).property('titleOverride')}
+    url = Neos.Neos:NodeUri {
+        node = ${episode}
+        format = 'html'
+        absolute = true
+    }
+    description = ${q(episode).property('metaDescription')}
+    date = ${Date.format(q(episode).property('publicationDate'), 'D, d M Y H:i:s O')}
+    image = Neos.Neos:ImageUri {
+        asset = ${q(episode).property('poster')}
+        absolute = true
+        @if.hasImage = ${q(documentNode).property('poster') != null}
+    }
+
+    audio = ${Array.first(Podcaster.filterByProperty(q(episode).property('audio'), 'resource.fileExtension', request.arguments.audiotype))}
+    audioLength = ${q(episode).property('audioLength')}
+
+    @if.hasAudio = ${this.audio ? true : false}
+}

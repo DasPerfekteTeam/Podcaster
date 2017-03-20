@@ -1,0 +1,15 @@
+prototype(DasPerfekteTeam.Podcaster:EpisodeList) >
+prototype(DasPerfekteTeam.Podcaster:EpisodeList) < prototype(Neos.Fusion:Tag) {
+    tagName = 'div'
+    attributes.class = 'row'
+    content = Neos.Fusion:Collection {
+        collection = ${q(site).find('[instanceof DasPerfekteTeam.Podcaster:Episode]')}
+        itemRenderer = DasPerfekteTeam.Podcaster:EpisodeCard
+    }
+
+    # The following line must not be removed as it adds required meta data to all content elements in backend
+    @process.contentElementWrapping {
+        expression = Neos.Neos:ContentElementWrapping
+        @position = 'end 999999999'
+    }
+}

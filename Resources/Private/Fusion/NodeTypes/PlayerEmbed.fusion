@@ -1,0 +1,47 @@
+prototype(DasPerfekteTeam.Podcaster:PlayerEmbed) {
+    @context.episodeNode = ${documentNode}
+    @context.podcast = ${q(documentNode).closest('[instanceof DasPerfekteTeam.Podcaster:Podcast]').get(0)}
+    documentNode = ${episodeNode}
+
+    metadata = Neos.Fusion:RawArray {
+        title = ${episodeNode.label}
+        subtitle = ''
+        publicationDate = ${Date.format(episodeNode.lastPublicationDateTime, 'Y-m-d\TH:i:sP')}
+        poster = Neos.Neos:ImageUri {
+            asset = ${q(episodeNode).property('poster')}
+            @if.hasImage = ${q(episodeNode).property('poster') != null}
+        }
+
+        permalink = Neos.Neos:NodeUri {
+            node = ${q(episodeNode).context({workspaceName: 'live'}).get(0)}
+            absolute = true
+        }
+        alwaysShowHours = true
+        startVolume = 0.8
+        width = 'auto'
+        summaryVisible = false
+        timecontrolsVisible = true
+        sharebuttonsVisible = false
+        chaptersVisible = false
+
+        chapters = Neos.Fusion:RawCollection {
+            collection = ${q(episodeNode).children('chapters').children().get()}
+            itemRenderer = Neos.Fusion:RawArray {
+                start = ${q(item).property('start')}
+                title = ${q(item).property('title')}
+            }
+        }
+
+        show = Neos.Fusion:RawArray {
+            title = ${q(podcast).property('title')}
+            subtitle = ''
+            summary = ${q(podcast).property('metaDescription')}
+            url = Neos.Neos:NodeUri {
+                node = ${q(podcast).context({workspaceName: 'live'}).get(0)}
+                absolute = true
+            }
+        }
+
+        activeTab = 'info'
+    }
+}

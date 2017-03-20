@@ -1,0 +1,15 @@
+prototype(DasPerfekteTeam.Podcaster:EpisodeCard) < prototype(Neos.Fusion:Template) {
+    templatePath = 'resource://DasPerfekteTeam.Podcaster/Private/Templates/FusionObjects/EpisodeCard.html'
+    node = ${item}
+    title = ${item.label}
+    player = DasPerfekteTeam.Podcaster:PlayerEmbed {
+        @context.episodeNode = ${item}
+
+        metadata {
+            summaryVisible = false
+            timecontrolsVisible = false
+            sharebuttonsVisible = false
+            chaptersVisible = false
+        }
+    }
+}
