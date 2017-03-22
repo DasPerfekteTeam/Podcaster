@@ -6,4 +6,15 @@
                     type="{f:if(condition: '{file.resource.fileExtension} == \'m4a\'', then: 'audio/mp4', else: file.resource.mediaType)}">
         </f:for>
     </audio>
+
+    <p>
+        <f:for each="{documentNode.properties.audio}" as="file">
+            <a href="{f:uri.resource(resource: file.resource)}" target="_blank" download>
+                <span class="chip">
+                    <f:format.case>{file.resource.fileExtension}</f:format.case>
+                    <i class="fa fa-cloud-download" title="download"></i>
+                </span>
+            </a>
+        </f:for>
+    </p>
 </div>
